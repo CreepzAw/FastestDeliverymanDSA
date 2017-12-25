@@ -6,26 +6,58 @@ import java.io.Serializable;
 public class Menu implements Serializable {
     
 private double price;
-private int prodId;
-private static int nextprodId=1;
+private String prodId;
+
 private String prodName;
+private String restaurantName;
+private boolean status=true;
+private double discountRate;
 
 public Menu(){
-    this.prodId= 0;
+    this.prodId= "";
     this.prodName="";
+    this.price=0.0;
+    this.restaurantName="";
+    this.status=true;
 }
 
 
-public Menu(int prodId,String prodName,Double price){
+public Menu(String prodId,String prodName,Double price,String restaurantName,boolean status,double discountRate){
 this.prodId=prodId;
 this.prodName=prodName;
 this.price=price;
+this.restaurantName=restaurantName;
+this.status=status;
+this.discountRate=discountRate;
 }
 
 
 public Menu(String prodName) {
     this.prodName = prodName;
-    this.prodId = nextprodId++;
+    
+  }
+
+public Double getDiscountRate(){
+    return discountRate;
+}
+
+public void setDiscountRate(){
+    this.discountRate=discountRate;
+}
+
+public String getRestaurantName(){
+    return restaurantName;
+}
+
+public void setRestaurantName(){
+    this.restaurantName=restaurantName;
+}
+  public boolean getStatus() {
+    return status;
+  }
+
+  public void setStatus(Boolean status) {
+    this.status=status;
   }
 
 
@@ -37,22 +69,15 @@ public Menu(String prodName) {
     this.prodName = prodName;
   }
 
-  public int getProdId() {
+  public String getProdId() {
     return prodId;
   }
 
-  public void setProdId(int prodId) {
+  public void setProdId(String prodId) {
     this.prodId = prodId;
   }
   
   
- public static int getNextProdId() {
-    return nextprodId;
-  }
-
-  public static void setNextProdId(int nextProdId) {
-    Menu.nextprodId = nextprodId;
-  }
 
   public double getPrice(){
       return price;
@@ -63,32 +88,12 @@ public Menu(String prodName) {
   }
   
 
- @Override
-  public int hashCode() {
-    int hash = 3;
-    return hash;
-  }
 
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == null) {
-      return false;
-    }
-    if (getClass() != obj.getClass()) {
-      return false;
-    }
-    final Menu other = (Menu) obj;
-    if (this.prodId != other.prodId) {
-      return false;
-    }
-    return true;
-  }
-  
-  
       
   @Override
   public String toString() {
-    return String.format("\n |%-16d | %-15s | RM %-20.2f|", prodId, prodName,price);
+  return String.format("|%-16s | %-15s | RM %-20.2f |%-16s |%-16.2f|"+status , prodId, prodName,price,restaurantName,discountRate);
+
   }
   
 
