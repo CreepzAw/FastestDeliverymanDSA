@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Module_A;
+package ModuleA;
 
 /**
  *
@@ -11,9 +11,11 @@ package Module_A;
  */
 public interface ListInterface<T> {
     public void add(T newEntry);
-    public void remove(int index);
+    public void remove(int givenPosition);
     public void clear();
-    public T get(int index);
-    public boolean replace(T element, int index);
+    public void display();
+    public T get(int givenPosition);
+    public boolean replace(T newEntry, int givenPosition);
     public boolean isEmpty();
+    public boolean contains(T  newEntry);
 }

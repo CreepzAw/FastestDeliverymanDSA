@@ -19,7 +19,7 @@ public class CustomerInfoRetrieval {
         
             do {
                 redo = 0;
-                Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/ModuleCPrototypedatabase", "ModuleC", "ModuleC");
+                Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/ModuleC", "ModuleC", "ModuleC");
                 String contactNumber;
                         
                 boolean invalid = false;

@@ -9,7 +9,14 @@ package Module_B;
  *
  * @author C K
  */
-public class Staff {
+public class Staff   {
+
+
+/**
+ *
+ * @author C K
+ */
+
     
     private String Astaff_name;
     private String Astaff_icNo;
@@ -17,14 +24,13 @@ public class Staff {
     private String Astaff_status;
     private String Astaff_gender;
     private String Astaff_userName;
-    private String Astaff_passWord;
     
     public Staff(){
     
-        this("","","","","","","");
+        this("","","","","","");
     }
     
-    public Staff(String Astaff_name,String Astaff_icNo,String Astaff_phoneNo,String Astaff_status,String Astaff_gender,String Astaff_userName,String Astaff_passWord){
+    public Staff(String Astaff_name,String Astaff_icNo,String Astaff_phoneNo,String Astaff_status,String Astaff_gender,String Astaff_userName){
     
         this.Astaff_name=Astaff_name;
         this.Astaff_icNo=Astaff_icNo;
@@ -32,7 +38,7 @@ public class Staff {
         this.Astaff_status=Astaff_status;
         this.Astaff_gender=Astaff_gender;
         this.Astaff_userName=Astaff_userName;
-        this.Astaff_passWord=Astaff_passWord;
+
         
     }
     
@@ -84,17 +90,12 @@ public class Staff {
     this.Astaff_userName=Astaff_userName;
     }
     
-    public String getAstaff_passWord(){
-     return Astaff_passWord;
-    }
-    
-    public void setAstaff_passWord(String Astaff_passWord ){
-    this.Astaff_passWord=Astaff_passWord;
-    }
+
     
     public String toString(){
     
-        return"Name : " + Astaff_name + " | IC.NO : " + Astaff_icNo + "| Contact Number : "+Astaff_phoneNo+" | Status : " + Astaff_status + " | Gender : " + Astaff_gender + " | Username : " + Astaff_userName +
-                " | Password : " + Astaff_passWord +"\n";
+        return"Name : " + Astaff_name + " | IC.NO : " + Astaff_icNo + "| Contact Number : "+Astaff_phoneNo+" | Status : " + Astaff_status + " | Gender : " + Astaff_gender + " | Username : " + Astaff_userName +"\n";
     }
 }
+
+

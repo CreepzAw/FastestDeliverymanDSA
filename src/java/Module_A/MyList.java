@@ -27,11 +27,11 @@ public class MyList<T> implements ListInterface<T>{
     count++;
   }
   
-  public void remove(int index){
-    if(index >= 0 && index < count){
+  public void remove(int givenPosition){
+    if(givenPosition >= 0 && givenPosition < count){
       Node temp = this.head;
       
-      if(index == 0){
+      if(givenPosition == 0){
         this.head = head.getNext();
         count--;
         return;
@@ -42,7 +42,7 @@ public class MyList<T> implements ListInterface<T>{
       Node previous = temp;
       while(temp.getNext() != null){
         
-        if(i == index){
+        if(i == givenPosition){
           break;
         }
         previous = temp;
@@ -62,7 +62,7 @@ public class MyList<T> implements ListInterface<T>{
     }
   }
   
-  public T get(int index){
+  public T get(int givenPosition){
     
     int i = 0;
     
@@ -70,7 +70,7 @@ public class MyList<T> implements ListInterface<T>{
     
     while(temp != null){
       
-      if(i == index){
+      if(i == givenPosition){
         return temp.getData();
       }
       
@@ -81,20 +81,20 @@ public class MyList<T> implements ListInterface<T>{
     return null;
   }
   
-      public boolean replace(T element, int index) {
+      public boolean replace(T newEntry, int givenPosition) {
         Node current = head;
         Node prev = null;
 
-        while (current != null && index >= 0) {
-            index--;
+        while (current != null && givenPosition >= 0) {
+            givenPosition--;
             prev = current;
             current = current.next;
         }
 
-        if (index > 0) return false;
+        if (givenPosition > 0) return false;
 
         if (prev != null)
-            prev.data = element;
+            prev.data = newEntry;
 
         return true;
     }
@@ -116,23 +116,6 @@ public class MyList<T> implements ListInterface<T>{
     
     
   
-  @Override
-  public String toString(){
-    Node temp = head;
-    StringBuffer buffer = new StringBuffer();
-    
-    int i = 0;
-    while(temp != null){
-      
-      buffer.append("\n" + i +". " + temp);
-      temp = temp.getNext();
-      i++;
-      
-    }
-    
-    return buffer.toString();
-  }
-  
   public void display(){
     
     Node temp = head;
@@ -145,13 +128,13 @@ public class MyList<T> implements ListInterface<T>{
     }
   }
   
-  public boolean contains(T  obj){
+  public boolean contains(T  newEntry){
     
     Node temp = head;
     
     while(temp != null){
       
-      if(obj.equals(temp.getData())){
+      if(newEntry.equals(temp.getData())){
         return true;
       }      
       

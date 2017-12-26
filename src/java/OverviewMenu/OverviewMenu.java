@@ -7,15 +7,12 @@ import Module_D.*;
 
 import java.util.Scanner;
 
-public class TeamMoronOverviewMenu {
+public class OverviewMenu {
 
     
     public static void main(String[] args) {
         
         Scanner scanner = new Scanner(System.in);
-        ModuleA addmenu = new ModuleA();
-        AddStaff addstaff = new AddStaff();
-        ModuleD moduleD = new ModuleD();
         int more = 0;
         
         do {
@@ -28,17 +25,17 @@ public class TeamMoronOverviewMenu {
 
             int response = scanner.nextInt();
             if (response == 1){
-                addmenu.mainMenu();
+                ModuleA moduleA = new ModuleA();
             }
             else if (response == 2){
-                addstaff.Menu();
+                ModuleB moduleB =  new ModuleB();
             }
             else if (response == 3){
-                System.out.println("For customer/client side, please access servlet files manually");
+                System.out.println("For customer/client side, please access servlet file name RestaurantMenu manually");
                 CustomerInfoRetrieval retrieve = new CustomerInfoRetrieval();
             }
             else if (response == 4){
-                moduleD.mainmenu();
+                ModuleD moduleD = new ModuleD();
             }
             
             System.out.println("More operations? (Enter 1 for yes)");
