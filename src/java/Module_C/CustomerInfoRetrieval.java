@@ -41,7 +41,7 @@ public class CustomerInfoRetrieval {
                 String firstThree = contactNumber.substring(0, 3);
                 String lastSegment = contactNumber.substring(4);
 
-                PreparedStatement statementQuery = conn.prepareStatement("Select * from customer_delivery where customer_contactnumber = ? and status_delivered = false");
+                PreparedStatement statementQuery = conn.prepareStatement("Select * from customer_delivery where contactnumber = ? and delivered = false");
                 statementQuery.setString(1, firstThree.concat(lastSegment));
                 System.out.println("\n");
 
@@ -65,10 +65,10 @@ public class CustomerInfoRetrieval {
                         System.out.println("\n");
                         System.out.println("Result "+index+":");
                         System.out.println("-----------------");
-                        System.out.println("Contact Number: "+results.getString("Customer_ContactNumber"));
+                        System.out.println("Contact Number: "+results.getString("ContactNumber"));
                         System.out.println("Order ID: "+results.getString("Order_ID"));
-                        System.out.println("Customer Name: "+results.getString("Customer_Name"));
-                        System.out.println("Customer Address: "+results.getString("Customer_DELIVERY_Address"));
+                        System.out.println("Customer Name: "+results.getString("Name"));
+                        System.out.println("Customer Address: "+results.getString("Address"));
                         System.out.println("Enter any value to proceed");
                         valuePlaceholder = scanner.nextLine();
                     }

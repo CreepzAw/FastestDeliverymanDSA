@@ -12,3 +12,5 @@ os.arch=amd64
 os.version=6.3
 derby.system.home=C:\Users\lenovo\Desktop\College Items\Degree Software Systems Development 2017\Semester 1\DATA STRUCTURES AND ALGORITHM\Assignment\FastestDeliverymanDSA\src\Database
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Tue Dec 26 18:56:08 SGT 2017: Shutting down Derby engine

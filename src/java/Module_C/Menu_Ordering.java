@@ -202,6 +202,7 @@ public class Menu_Ordering {
                 System.out.println("2. Remove items");
                 System.out.println("3. Confirm order");
                 option = scanner.nextInt();
+                newLineEater = scanner.nextLine();
                 if (option == 1){
                     order(peekResult.getOrderID());
                 }
@@ -212,16 +213,51 @@ public class Menu_Ordering {
                     newLineEater = scanner.nextLine();
                 }
                 else if (option == 3){
+                    //Insert customer info
+                    customerInformation(data[0].getOrderID());
+                    
                     OrderData updateDB = new OrderData();
                     order = temp;
                     updateDB.insertNewOrder(order);
                     
+                    System.out.println();
+                    System.out.println();
+                    System.out.println();
                     System.out.println("Order placed, thank you for your patronage");
-                    System.out.println();
-                    System.out.println();
-                    System.out.println();
                 }
             }
         }while (option != 3);
+    }
+    
+    public void customerInformation(String orderID){
+        CustomerDeliveryInfo info = new CustomerDeliveryInfo();
+        System.out.println("Thank you for using FastestDeliveryman");
+        System.out.println("--------------------------------------");
+        System.out.println("Please fill in the details below to confirm your order");
+        System.out.print("Enter your name: ");
+        info.setName(scanner.nextLine());
+        
+        System.out.print("Enter the delivery address: ");
+        info.setAddress(scanner.nextLine());
+        
+        String contactNumber;
+        boolean invalid;
+        do{
+            invalid = false;
+            System.out.print("Please enter a contact  number in the format (xxx-xxxxxxx): ");
+            contactNumber = scanner.nextLine();
+            if (contactNumber.length() != 11){
+                invalid = true;
+                System.err.println("Invalid contact number, try again\n");
+            }
+        }while (invalid == true);
+        String firstThree = contactNumber.substring(0, 3);
+        String lastSegment = contactNumber.substring(4);
+        info.setContactNumber(firstThree.concat(lastSegment));
+        
+        info.setOrderID(orderID);
+        info.setDelivered(false);
+        
+        info.addIntoLocalDatabase();
     }
 }
