@@ -125,42 +125,38 @@ public class Menu_Ordering {
                 newLineEater = scanner.nextLine();
                 
                 //
-                int length;
+                
+                boolean condition = false; //stores value of whether item matches in check
                 stack = new OrderStack();
-                
-                if (order.length+1 > 0){ 
-                    length = order.length+1;
-                    OrderData[] comparisonData = new OrderData[length];
-                    int oldQuantity = 0;
-                    int itemIndex = 0;
-                    int foundResult = 0;
-                    
-                    for (int count = 0; count < length; count++){
-                        comparisonData[count] = (OrderData)order.pop();
-                        stack.push((OrderData)comparisonData[count]);
-                        if (data[itemToAdd-1].getID().equals(comparisonData[count].getItemID())){
-                            System.out.println("Exiting item has been ordered, adding the new order into the old quantity");
-                            oldQuantity = comparisonData[count].getQuantity();
-                            quantity = quantity + oldQuantity;
-                            itemIndex = count;
-                            foundResult = 1;
-                        }
-                    }
-                    order = stack;
-                    if (foundResult == 1){
-                        order.removeSelected(itemIndex);
-                    }
-                }
-                
-                
-                //
-                
                 try {
-                    OrderData entry = new OrderData(orderID, data[itemToAdd-1].getID(), data[itemToAdd-1].getName(), data[itemToAdd-1].getPrice(), quantity, data[itemToAdd-1].getResturantName(), data[itemToAdd-1].getDiscount());
-                    order.push(entry);
+                    //If true, means order stack has at least 1 record
+                    int length = order.length+1;
+                    if (length > 0){
+                        OrderData[] record = new OrderData[length];
+                        for (int start = 0; start < length; start++){
+                            record[start] = (OrderData)order.pop();
+                            if (record[start].getItemID().equals(data[itemToAdd-1].getID())){
+                                int newQuantity = record[start].getQuantity() + quantity;
+                                record[start].setQuantity(newQuantity);
+                                
+                                condition = true;
+                            }
+                            else {
+                                condition = false;
+                            }
+                            stack.push(record[start]);
+                        }
+                        order = stack;
+                    }
+                    if (condition != true)
+                    {
+                        OrderData entry = new OrderData(orderID, data[itemToAdd-1].getID(), data[itemToAdd-1].getName(), data[itemToAdd-1].getPrice(), quantity, data[itemToAdd-1].getResturantName(), data[itemToAdd-1].getDiscount());
+                        order.push(entry);
+                    }
+                    
                 }
                 catch(Exception ex){
-                    System.err.println("Enter index as shown in table");
+                    System.err.println(ex);
                 }
                 System.out.print("Enter 1 to add more items to the list: ");
                 more = scanner.nextInt();
@@ -177,7 +173,7 @@ public class Menu_Ordering {
         String newLineEater; //Removes excess newline
         
         //Generate a duplicate stack for editing
-        int ItemCount = order.length+1;
+        int ItemCount;
         OrderStack temp = new OrderStack();
         
         //Peek for restaurant name
@@ -185,6 +181,7 @@ public class Menu_Ordering {
         String restaurantName = peekResult.getRestaurantName();
         
         do{
+            ItemCount = order.length+1;
             if (order.length != -1){
                 OrderData[] data = new OrderData[order.length+1];
                 
@@ -197,6 +194,7 @@ public class Menu_Ordering {
                     temp.push((OrderData)data[index]);
                     System.out.printf("%-3d | %-11s | %-30s | %-10.2f | %-10d | %-10.2f\n", index+1, data[index].getOrderID(), data[index].getItemName(), data[index].getUnitPrice(), data[index].getQuantity(), data[index].getTotalUnitPrice());
                 }
+                order = temp;
                 System.out.println("Select an option below: ");
                 System.out.println("1. Add items");
                 System.out.println("2. Remove items");
@@ -209,7 +207,29 @@ public class Menu_Ordering {
                 else if (option == 2){
                     System.out.print("Select an item to remove: ");
                     int index = scanner.nextInt();
-                    order.removeSelected(index-1);
+                    
+                    stack = new OrderStack();
+                    try {
+                    //If true, means order stack has at least 1 record
+                        int length = order.length+1;
+                        if (length > 0){
+                            OrderData[] record = new OrderData[length];
+                            for (int start = 0; start < length; start++){
+                                record[start] = (OrderData)order.pop();
+                                if (record[start].getItemID().equals(data[index-1].getItemID())){
+                                    
+                                }
+                                else {
+                                    stack.push(record[start]);
+                                }
+                            }
+                        order = stack;
+                        }
+                    }
+                    catch (Exception ex){
+                            System.out.println("Error");
+                    }
+                    
                     newLineEater = scanner.nextLine();
                 }
                 else if (option == 3){

@@ -53,10 +53,10 @@ public class CustomerInfoRetrieval {
                 else {
                     System.out.println("Result 1:");
                     System.out.println("-----------------");
-                    System.out.println("Contact Number: "+results.getString("Customer_ContactNumber"));
-                    System.out.println("Order ID: "+results.getString("Order_ID"));
-                    System.out.println("Customer Name: "+results.getString("Customer_Name"));
-                    System.out.println("Customer Address: "+results.getString("Customer_DELIVERY_Address"));
+                    System.out.println("Contact Number: "+results.getString("ContactNumber"));
+                    System.out.println("Order ID: "+results.getString("OrderID"));
+                    System.out.println("Customer Name: "+results.getString("Name"));
+                    System.out.println("Customer Address: "+results.getString("Address"));
                     System.out.println("Enter any value to proceed");
                     String valuePlaceholder = scanner.nextLine();
                     
@@ -66,7 +66,7 @@ public class CustomerInfoRetrieval {
                         System.out.println("Result "+index+":");
                         System.out.println("-----------------");
                         System.out.println("Contact Number: "+results.getString("ContactNumber"));
-                        System.out.println("Order ID: "+results.getString("Order_ID"));
+                        System.out.println("Order ID: "+results.getString("OrderID"));
                         System.out.println("Customer Name: "+results.getString("Name"));
                         System.out.println("Customer Address: "+results.getString("Address"));
                         System.out.println("Enter any value to proceed");

@@ -104,16 +104,17 @@ public class MenuData {
             System.out.println("Database connection failed");
         }
     }
-    public void updateLocalDatabase(String ID, String name, double price, boolean status, String restaurantName, double discountRate){
+    public void updateLocalDatabase(String ID, String name, double price, boolean status, String restaurantName, double discountRate, String selectedID){
         try {
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/ModuleC", "ModuleC", "ModuleC");
-            PreparedStatement insert = conn.prepareStatement("update Menu set ID=?, Name=?, Price=?, Status=?, RestaurantName=?, DiscountRate=?");
+            PreparedStatement insert = conn.prepareStatement("update Menu set ID=?, Name=?, Price=?, Status=?, RestaurantName=?, Discount=? where id=?");
             insert.setString(1, ID);
             insert.setString(2, name);
             insert.setDouble(3, price);
             insert.setBoolean(4, status);
             insert.setString(5, restaurantName);
             insert.setDouble(6, discountRate);
+            insert.setString(7, selectedID);
             
             insert.execute();
         }

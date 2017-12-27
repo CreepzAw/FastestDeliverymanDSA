@@ -84,23 +84,29 @@ public class ModuleA {
         String p = "Product Price";
         String d = "Discount Rate";
         String rtName= "Restaurant Name";
-         Menu m1 = new Menu("ABC123","coconut",12.00,restaurantName,true,0);
-         Menu m2 = new Menu("ABC124","papaya",11.00,restaurantName,true,0.2);
-         Menu m3 = new Menu("ABC125","durian",100.00,restaurantName,false,0.15);
-         Menu m4 = new Menu("ABC126","coco",15.00,restaurantName,true,2);
-         list.add(m1);
-         list.add(m2);
-         list.add(m3);
-         list.add(m4);
+        int sort=0;
+//         Menu m1 = new Menu("ABC123","coconut",12.00,restaurantName,true,0);
+//         Menu m2 = new Menu("ABC124","papaya",11.00,restaurantName,true,0.2);
+//         Menu m3 = new Menu("ABC125","durian",100.00,restaurantName,false,0.15);
+//         Menu m4 = new Menu("ABC126","coco",15.00,restaurantName,true,2);
+//         list.add(m1);
+//         list.add(m2);
+//         list.add(m3);
+//         list.add(m4);
         
         System.out.format("NO |%-16s | %-15s | %-23s |%-16s |%-16s|"+s , id, name,p,rtName,d);
         System.out.println("");
         System.out.println("____________________________________________________________________________________________________________");
-        for(int i=0;i<list.size();i++){
-        System.out.println("" + i +". " + list.get(i));
+//        for(int i=0;i<list.size();i++){
+//        System.out.println("" + i +". " + list.get(i));
+//        
+//        
+//     }
+        for(int i=list.size()-1;i>=0;i--){
+            System.out.println("" + sort +". " + list.get(i));
+            sort++;
+        }
         
-        
-     }
         System.out.println("");
         System.out.println("");
         mainMenu();
@@ -128,10 +134,12 @@ public class ModuleA {
          boolean status = true;
          char available='Y';
          double discountRate =0.0;
+         String dbTemp="";
          
         System.out.println("Menu Contents: ");
         for(int i=0;i<list.size();i++){
         System.out.println("" + i +". " + list.get(i));
+        dbTemp=list.get(i).getProdId();
          }
         System.out.println("Enter No to update");
         updateChoice=Integer.parseInt(scanner.nextLine());
@@ -159,7 +167,7 @@ public class ModuleA {
         
         //Update database
         MenuData data = new MenuData();
-        data.updateLocalDatabase(productId, name, price, status, restaurantName, discountRate);
+        data.updateLocalDatabase(productId, name, price, status, restaurantName, discountRate, dbTemp);
         
         Menu menu = new Menu(productId,name,price,restaurantName,status,discountRate);
         list.replace(menu,updateChoice);

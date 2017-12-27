@@ -174,4 +174,19 @@ public class OrderData {
         }
         
     }
+    
+    public ResultSet getOrderData(){
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/ModuleC", "ModuleC", "ModuleC");
+            
+            PreparedStatement pstmtGet = conn.prepareStatement("SELECT * FROM CUSTOMER_DELIVERY where delivered = false");
+            ResultSet rsData = pstmtGet.executeQuery();
+            
+            return rsData;
+        }
+        catch (SQLException ex){
+            System.err.println(ex);
+            return null;
+        }
+    }
 }

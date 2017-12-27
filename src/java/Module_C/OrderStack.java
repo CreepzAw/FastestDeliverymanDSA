@@ -1,86 +1,81 @@
 package Module_C;
 
 public class OrderStack<OrderData> implements OrderStack_Interface<OrderData> {
-    OrderData[] order;  //The object array to store data
-    int length = -1;    //Index pointer for stack ADT
-    int size = 1;       //Size indicator
+    Node topNode;
+    int length = -1;    //keeps track of size
     
-    //Default constructor that sets the object array size to 1
+    //initializes link list
     public OrderStack(){
-        order = (OrderData[]) new Object[size];
+        topNode = null;
     }
     
-    //Increases length by 1 everytime it is invoked
+    //Adds a new node on top of the existing top node
     public void push(OrderData newEntry){
-        length++;   
-        if (isArrayFull()){
-            doubleArray();
+        length++;
+        if (isEmpty()){
+            Node newNode = new Node(newEntry);
+            topNode = newNode;
+            topNode.next = null;
         }
-        order[length] = newEntry;
+        else {
+            Node newNode = new Node (newEntry, topNode);
+            newNode.next = topNode;
+            topNode = newNode;
+        }
     }
     
-    //Decreases length by 1 every time this is invoked and returns the object
+    //Removes top most node and set the node below it as top
     public OrderData pop(){
-        OrderData object = order[length];
-        order[length] = null;
-        length--;
-        return object;  //Returns OrderData object on top of the stack
+        if (isEmpty()){
+            return null;
+        }
+        else {
+            length--;
+            Node temp = topNode;
+            topNode = topNode.next;
+            return temp.data;
+        }
     }
     
-    //Returns the OrderData object on top of the stack
+    //Returns topmost node without modifying the list
     public OrderData peek(){
-        return order[length];
-    }
-    
-    //Removes the object with the index passed into the method
-    public void removeSelected(int index){
-        int pointer = index;    //Points to the index that needs to be removed
-        if (index >= 0){
-            for (int counter = length; counter >= pointer; counter--){
-                if ((counter) != (length+1)){
-                    order[counter] = order[counter+1];
-                    length--;
-                }
-                else {
-                    order[counter] = null;
-                    length--;
-                }
-            }
+        if (isEmpty()){
+            return null;
+        }
+        else {
+            return topNode.data;
         }
     }
     
-    //Checks if the stack is empty, returns boolean value
+    //Checks if the linked list is empty
     public boolean isEmpty(){
-        if (length == -1){
+        if (topNode==null){
             return true;
         }
-        else
+        else {
             return false;
+        }
     }
     
-    //Sets length to -1 
-    //Causes stack information to be "reset" but does not affect existing size
+    //Clears the linked list
     public void clear(){
-        length = -1;
+        topNode = null;
     }
     
-    //Checks if array is full, returns boolean value 
-    private boolean isArrayFull(){
-        if (length >= size){
-            return true;
-        }
-        else 
-            return false;
-    }
-    
-    //Doubles the size of the array when invoked
-    private void doubleArray(){
-        size = size * 2;
+    //Node object class
+    private class Node{
+        private OrderData data;
+        private Node next;
         
-        OrderData[] oldArray = order;
-        order = (OrderData[]) new Object[size];
-        for (int counter = 0; counter < oldArray.length; counter++){
-            order[counter] = oldArray[counter];
+        public Node(OrderData Data){
+            this.data = Data;
+            this.next = null;
+        }
+        
+        public Node(OrderData Data, Node top){
+            this.data = Data;
+            this.next = top;
         }
     }
 }
+

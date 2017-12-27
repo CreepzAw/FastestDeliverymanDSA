@@ -5,6 +5,9 @@
  */
 package Module_B;
 
+import Module_C.*;
+import java.sql.ResultSet;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -208,18 +211,19 @@ public class ModuleB {
     
     public static void RetrievePending(){
     
-        Pending pending = new Pending();
-        String staffName="";
-        String staffID="";
-        String orderID="";
-        
-        pending.setStaff_Name("ASH");
-        pending.setStaff_ID("A1001");
-        pending.setOrder_ID("123");
-        pendingList.add(pending);
         
         
-        System.out.println(pendingList);
+        OrderData getData = new OrderData();
+        ResultSet pendingDelivery = getData.getOrderData();
+        try {
+            for (;pendingDelivery.next();){
+                System.out.println(pendingDelivery.getString("Name") + pendingDelivery.getString("Address") + pendingDelivery.getString("ContactNumber") + pendingDelivery.getString("Orderid"));
+            }
+        }
+        catch (Exception ex){
+            System.out.println(ex);
+        }
+        
         
         
     }
